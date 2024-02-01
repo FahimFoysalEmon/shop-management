@@ -26,13 +26,12 @@ public class AuthenticationService {
                 .userPhone(request.getUserPhone())
                 .userEmail(request.getUserEmail())
                 .userPassword(passwordEncoder.encode(request.getUserPassword()))
-                .role(Role.USER)
+                .role(Role.SUPER_ADMIN)
                 .build();
         userRepository.save(user);
 
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
-
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
