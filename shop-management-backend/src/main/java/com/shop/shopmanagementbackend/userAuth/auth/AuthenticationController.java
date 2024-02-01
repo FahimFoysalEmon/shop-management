@@ -22,6 +22,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(authenticationService.register(request));
     }
 
+    @PostMapping(UserAuthEndPointUtils.CREATE_MANAGER)
+    public ResponseEntity<AuthenticationResponse> createManager(
+            @RequestBody @Valid RegisterRequest request
+    ) {
+        return ResponseEntity.ok(authenticationService.createManager(request));
+    }
 
 
     @PostMapping(UserAuthEndPointUtils.AUTHENTICATE)

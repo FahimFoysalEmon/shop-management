@@ -2,6 +2,7 @@ package com.shop.shopmanagementbackend.userAuth.config;
 
 import com.shop.shopmanagementbackend.userAuth.auth.JwtAuthenticationEntryPoint;
 import com.shop.shopmanagementbackend.userAuth.auth.utils.UserAuthEndPointUtils;
+import com.shop.shopmanagementbackend.userAuth.user.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,6 +36,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.ADMIN_USER_AUTH_REGISTER).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.AUTHENTICATE).permitAll()
+                .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.CREATE_MANAGER).hasRole(String.valueOf(Role.SUPER_ADMIN))
                 .anyRequest()
                 .authenticated()
                 .and()
