@@ -1,9 +1,9 @@
 package com.shop.shopmanagementbackend.userAuth.auth;
 
-import com.security.springsecuritywithjwttoken.config.JwtService;
-import com.security.springsecuritywithjwttoken.user.Role;
-import com.security.springsecuritywithjwttoken.user.User;
-import com.security.springsecuritywithjwttoken.user.UserRepository;
+import com.shop.shopmanagementbackend.userAuth.config.JwtService;
+import com.shop.shopmanagementbackend.userAuth.user.Role;
+import com.shop.shopmanagementbackend.userAuth.user.User;
+import com.shop.shopmanagementbackend.userAuth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

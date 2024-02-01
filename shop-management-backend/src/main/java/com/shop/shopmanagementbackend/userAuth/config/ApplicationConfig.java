@@ -1,6 +1,6 @@
 package com.shop.shopmanagementbackend.userAuth.config;
 
-import com.security.springsecuritywithjwttoken.user.UserRepository;
+import com.shop.shopmanagementbackend.userAuth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
