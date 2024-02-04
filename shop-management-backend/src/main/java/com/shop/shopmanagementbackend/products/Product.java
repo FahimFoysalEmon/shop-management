@@ -1,19 +1,17 @@
-package com.shop.shopmanagementbackend.categories;
+package com.shop.shopmanagementbackend.products;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.shop.shopmanagementbackend.categories.utils.CategoryEnums;
-import com.shop.shopmanagementbackend.products.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shop.shopmanagementbackend.categories.Category;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -21,18 +19,23 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Category {
+public class Product {
 
     @Id
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
-    private CategoryEnums name;
+    @ManyToOne(cascade = jakarta.persistence.CascadeType.REMOVE)
+    @JsonIgnore
+    private Category category;
 
-    @OneToMany
-    @Cascade(CascadeType.ALL)
-    private List<Product> productList;
+    @NotBlank
+    private String name;
+
+    private int quantity;
+
+    private boolean available;
 
     @CreationTimestamp
     @Column(updatable = false)
@@ -42,5 +45,4 @@ public class Category {
     @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime lastUpdatedOn;
-
 }
