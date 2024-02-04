@@ -1,5 +1,6 @@
 package com.shop.shopmanagementbackend.userAuth.config;
 
+import com.shop.shopmanagementbackend.categories.utils.CategoryEndPointUtils;
 import com.shop.shopmanagementbackend.userAuth.auth.JwtAuthenticationEntryPoint;
 import com.shop.shopmanagementbackend.userAuth.auth.utils.UserAuthEndPointUtils;
 import com.shop.shopmanagementbackend.userAuth.user.Role;
@@ -34,9 +35,21 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+
+                //AUTH
+
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.ADMIN_USER_AUTH_REGISTER).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.AUTHENTICATE).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.CREATE_MANAGER).hasRole(String.valueOf(Role.SUPER_ADMIN))
+
+
+                //CATEGORY
+
+                .requestMatchers(HttpMethod.POST, CategoryEndPointUtils.SAVE_CATEGORY).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
+                .requestMatchers(HttpMethod.GET, CategoryEndPointUtils.FETCH_CATEGORIES).permitAll()
+
+
+
                 .anyRequest()
                 .authenticated()
                 .and()

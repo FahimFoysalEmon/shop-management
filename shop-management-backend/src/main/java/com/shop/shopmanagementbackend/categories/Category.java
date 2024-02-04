@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.shop.shopmanagementbackend.categories.utils.CategoryEnums;
 import com.shop.shopmanagementbackend.products.Product;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -28,6 +29,7 @@ public class Category {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
+    @NotBlank
     private CategoryEnums name;
 
     @OneToMany
