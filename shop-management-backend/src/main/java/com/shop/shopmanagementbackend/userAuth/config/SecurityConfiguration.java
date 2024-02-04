@@ -28,6 +28,10 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+    private final String USER = "USER";
+    private final String ADMIN = "ADMIN";
+    private final String SUPER_ADMIN = "SUPER_ADMIN";
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -52,7 +56,7 @@ public class SecurityConfiguration {
 
                 //PRODUCT
 
-                .requestMatchers(HttpMethod.POST, ProductEndPointUtils.SAVE_PRODUCT).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
+                .requestMatchers(HttpMethod.POST, ProductEndPointUtils.SAVE_PRODUCT).hasAnyRole(ADMIN, SUPER_ADMIN)
                 .requestMatchers(HttpMethod.GET, ProductEndPointUtils.FETCH_PRODUCTS).permitAll()
 
 

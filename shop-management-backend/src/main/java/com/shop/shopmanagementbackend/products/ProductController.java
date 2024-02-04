@@ -19,7 +19,7 @@ public class ProductController {
     @PostMapping(value = ProductEndPointUtils.SAVE_PRODUCT)
     public ResponseEntity<ApiResponse> saveProduct(@PathVariable String categoryId,
                                                    @RequestBody Product product) {
-        return new ResponseEntity<>(new ApiResponse("Product created", productService.saveProduct(categoryId,product)), HttpStatus.CREATED);
+        return new ResponseEntity<>(new ApiResponse("Product added", productService.saveProduct(categoryId,product)), HttpStatus.CREATED);
     }
 
 

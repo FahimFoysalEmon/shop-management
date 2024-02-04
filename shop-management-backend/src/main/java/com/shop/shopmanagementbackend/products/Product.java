@@ -27,7 +27,7 @@ public class Product {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
-    @ManyToOne(cascade = jakarta.persistence.CascadeType.REMOVE)
+    @ManyToOne
     @JsonIgnore
     private Category category;
 
