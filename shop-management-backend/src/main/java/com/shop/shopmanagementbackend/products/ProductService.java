@@ -29,8 +29,10 @@ public class ProductService {
         }
 
         product.setCategory(category);
-//        category.setProductList(List.of(product));
-//        categoryRepo.save(category);
+        category.getProductList().add(product);
+
+        categoryRepo.save(category);
+
         return productRepo.save(product);
     }
 

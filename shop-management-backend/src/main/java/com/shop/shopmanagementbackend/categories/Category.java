@@ -6,6 +6,7 @@ import com.shop.shopmanagementbackend.categories.utils.CategoryEnums;
 import com.shop.shopmanagementbackend.products.Product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -29,10 +30,12 @@ public class Category {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
-    @NotBlank
+
+    @Enumerated(EnumType.STRING)
+    @NotNull
     private CategoryEnums name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "category", orphanRemoval = true)
     @Cascade(CascadeType.ALL)
     private List<Product> productList;
 
