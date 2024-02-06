@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                 //CATEGORY
 
                 .requestMatchers(HttpMethod.POST, CategoryEndPointUtils.SAVE_CATEGORY).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
-                .requestMatchers(HttpMethod.GET, CategoryEndPointUtils.FETCH_CATEGORIES).permitAll()
+                .requestMatchers(HttpMethod.GET, CategoryEndPointUtils.FETCH_CATEGORIES).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
 
 
                 //PRODUCT
