@@ -3,6 +3,7 @@ package com.shop.shopmanagementbackend.userAuth.config;
 import com.shop.shopmanagementbackend.categories.utils.CategoryEndPointUtils;
 import com.shop.shopmanagementbackend.products.utils.ProductEndPointUtils;
 import com.shop.shopmanagementbackend.userAuth.auth.JwtAuthenticationEntryPoint;
+import com.shop.shopmanagementbackend.userAuth.auth.LogoutService;
 import com.shop.shopmanagementbackend.userAuth.auth.utils.UserAuthEndPointUtils;
 import com.shop.shopmanagementbackend.userAuth.user.Role;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,8 @@ public class SecurityConfiguration {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final LogoutService logoutService;
+
 
     private final String USER = "USER";
     private final String ADMIN = "ADMIN";
@@ -46,6 +49,7 @@ public class SecurityConfiguration {
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.ADMIN_USER_AUTH_REGISTER).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.AUTHENTICATE).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.CREATE_MANAGER).hasRole(SUPER_ADMIN)
+                .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.LOGOUT).hasAnyRole(ADMIN, SUPER_ADMIN)
 
 
                 //CATEGORY
@@ -67,6 +71,11 @@ public class SecurityConfiguration {
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .and()
+                .logout()
+                .logoutUrl(UserAuthEndPointUtils.LOGOUT) // Specify the logout URL
+                .logoutSuccessHandler(logoutService::logout) // Set the custom LogoutService
+                .permitAll() // Allow all users to access the logout endpoint
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
