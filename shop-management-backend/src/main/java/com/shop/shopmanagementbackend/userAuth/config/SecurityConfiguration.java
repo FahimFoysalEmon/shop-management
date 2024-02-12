@@ -45,19 +45,21 @@ public class SecurityConfiguration {
 
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.ADMIN_USER_AUTH_REGISTER).permitAll()
                 .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.AUTHENTICATE).permitAll()
-                .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.CREATE_MANAGER).hasRole(String.valueOf(Role.SUPER_ADMIN))
+                .requestMatchers(HttpMethod.POST, UserAuthEndPointUtils.CREATE_MANAGER).hasRole(SUPER_ADMIN)
 
 
                 //CATEGORY
 
-                .requestMatchers(HttpMethod.POST, CategoryEndPointUtils.SAVE_CATEGORY).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
-                .requestMatchers(HttpMethod.GET, CategoryEndPointUtils.FETCH_CATEGORIES).hasAnyRole(String.valueOf(Role.SUPER_ADMIN), String.valueOf(Role.ADMIN))
+                .requestMatchers(HttpMethod.POST, CategoryEndPointUtils.SAVE_CATEGORY).hasAnyRole(SUPER_ADMIN, ADMIN)
+                .requestMatchers(HttpMethod.GET, CategoryEndPointUtils.FETCH_CATEGORIES).hasAnyRole(SUPER_ADMIN, ADMIN)
 
 
                 //PRODUCT
 
                 .requestMatchers(HttpMethod.POST, ProductEndPointUtils.SAVE_PRODUCT).hasAnyRole(ADMIN, SUPER_ADMIN)
                 .requestMatchers(HttpMethod.GET, ProductEndPointUtils.FETCH_PRODUCTS).permitAll()
+                .requestMatchers(HttpMethod.PUT, ProductEndPointUtils.UPDATE_PRODUCT).hasAnyRole(ADMIN, SUPER_ADMIN)
+                .requestMatchers(HttpMethod.DELETE, ProductEndPointUtils.DELETE_PRODUCT).hasAnyRole(ADMIN, SUPER_ADMIN)
 
 
                 .anyRequest()
