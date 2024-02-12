@@ -7,4 +7,5 @@ public class UserAuthEndPointUtils {
 
 
     public static final String CREATE_MANAGER = "/api/v1/auth/create-manager";
+    public static final String LOGOUT = "/api/v1/auth/logout";
 }

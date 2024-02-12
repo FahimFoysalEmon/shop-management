@@ -7,6 +7,7 @@ import com.shop.shopmanagementbackend.categories.Category;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -38,6 +39,7 @@ public class Product {
     private String brand;
 
     @NotNull
+    @PositiveOrZero
     private int quantity;
 
     @NotNull
